@@ -1,6 +1,6 @@
-__author__ = 'Peter'
-
 import matplotlib.pyplot as plt
+
+__author__ = 'Peter Matthies'
 
 
 # old calibration data import
@@ -38,7 +38,7 @@ old_yc = [float(d.split('\t')[0]) for d in data[yc_num+1:end_num]]
 old_yc_field = [float(d.split('\t')[1]) for d in data[yc_num+1:end_num]]
 
 
-#new calibration data import
+# new calibration data import
 with open('2016-09-23-pol-xy-axis-QMagnet.txt', 'r') as f:
     data = f.readlines()
 
@@ -74,10 +74,8 @@ new_yc = [float(d.split('\t')[0]) for d in data[yc_num+1:end_num]]
 new_yc_field = [float(d.split('\t')[1]) for d in data[yc_num+1:end_num]]
 
 
-
-
 # plotting to the the difference
-fig = plt.figure()
+fig = plt.figure(num=None, figsize=(8, 7), dpi=100, facecolor='w', edgecolor='k')
 fig.suptitle('Calibration Comparsion', fontsize=14, fontweight='bold')
 
 x_voltage_calib = fig.add_subplot(221)
@@ -113,5 +111,8 @@ y_current_calib.set_xlabel('Current (A)')
 y_current_calib.legend(loc=4, prop={'size':10})
 y_current_calib.grid()
 
-# plt.grid()
+fig.tight_layout()
+fig.subplots_adjust(top=0.9)
+plt.savefig('compare_calibrations.eps', format='eps', dpi=1000)
+plt.savefig('compare_calibrations.png', format='png', dpi=1000)
 plt.show()
